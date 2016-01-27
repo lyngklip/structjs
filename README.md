@@ -33,3 +33,5 @@ Please be aware that my interest in javascript is purely academic at this point,
 I have no idea if this code is idiomatic or even runs across various platforms.
 I have only tested with node and mocha, I don't know if it will work with other
 package manager, I don't even know if it works properly with npm.
+
+I run the tests using "mocha --require should".
