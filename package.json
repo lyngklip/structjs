@@ -1,0 +1,34 @@
+{
+  "name": "structjs",
+  "version": "1.0.0",
+  "description": "Python struct for javascript",
+  "main": "struct.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha --harmony --require should"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheRealAksel/structjs.git"
+  },
+  "keywords": [
+    "python",
+    "javascript",
+    "struct",
+    "pack",
+    "unpack",
+    "pack_into",
+    "unpack_from",
+    "calcsize",
+    "size",
+    "format"
+  ],
+  "author": "Aksel Jensen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheRealAksel/structjs/issues"
+  },
+  "homepage": "https://github.com/TheRealAksel/structjs#readme"
+}

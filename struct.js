@@ -1,5 +1,10 @@
-/*eslint-env node */
-/*eslint brace-style: 0*/
+/*eslint-env es6, node*/
+/*eslint curly:2, no-var: 2, no-trailing-spaces: 2, prefer-template: 2,
+  prefer-reflect: 2, prefer-spread: 2, prefer-arrow-callback: 2,
+  object-shorthand: 2, no-this-before-super: 2, no-dupe-class-members: 2,
+  no-const-assign: 2, linebreak-style: [2, "unix"], semi: [2, "never"],
+  indent: [2, 4, {"SwitchCase": 1}],
+  space-infix-ops: [2, {"int32Hint": true}]*/
 "use strict"
 const rechk = /^([<>])?(([1-9]\d*)?([xcbB?hHiIfdsp]))*$/
 const refmt = /([1-9]\d*)?([xcbB?hHiIfdsp])/g
@@ -38,11 +43,11 @@ const struct = format => {
         let v = new DataView(arrb, offs|0)
         return fns.map(f => f.u(v))
     }
-    const pack_into = (arrb, offs, values) => {
+    const pack_into = (arrb, offs, ...values) => {
         if (values.length < fns.length) { throw errval }
         if (arrb.byteLength < offs + size) { throw errbuf }
-        new Uint8Array(arrb, offs, size).fill(0)
         const v = new DataView(arrb, offs)
+        new Uint8Array(arrb, offs, size).fill(0)
         fns.forEach((f, i) => f.p(v, values[i]))
     }
     return Object.freeze({unpack_from, pack_into, format, size})
