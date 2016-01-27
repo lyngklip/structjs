@@ -4,7 +4,7 @@ Python struct for javascript
 Usage:
 
 
-let struct = require("struct")
+let struct = require("./struct")
 
 let s = struct("Bid10s")
 
@@ -16,7 +16,7 @@ s.pack_into(ab, 0, [1, -117, 47.234, "blah"])
 
 let a = s.unpack_from(ab)
 
-console.log(a)
+console.log(a) // [ 1, -117, 47.234, 'blah\u0000\u0000\u0000\u0000\u0000\u0000' ]
 
 
 pack_into takes an array, I'll probably change that to match Python.
