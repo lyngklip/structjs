@@ -30,5 +30,13 @@
   "bugs": {
     "url": "https://github.com/TheRealAksel/structjs/issues"
   },
-  "homepage": "https://github.com/TheRealAksel/structjs#readme"
+  "homepage": "https://github.com/TheRealAksel/structjs#readme",
+  "eslintConfig": {
+    "env": {
+      "es6": true,
+      "node": true,
+      "mocha": true
+    },
+    "ecmaFeatures": { "modules": true }
+  }
 }
