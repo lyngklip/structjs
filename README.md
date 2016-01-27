@@ -1,5 +1,6 @@
 #structjs
 Python struct for javascript
+
 Part of the documentation is blatantly stolen from Python docs.
 ##Functions
 The module defines the following functions:
@@ -54,9 +55,9 @@ For the '?' format character, the return value is either `true` or `false`. When
 A basic example of packing/unpacking three integers:
 ```javascript
 let struct = require("./struct")
-let ab = new ArrayBuffer(100)
-struct('hhi').pack_into(ab, 0, 1, 2, 3)
-let a = new Uint8Array(ab)
+let b = new ArrayBuffer(100)
+let a = new Uint8Array(b)
+struct('hhi').pack_into(b, 0, 1, 2, 3)
 a.slice(0, 6) // Uint8Array { '0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0 }
 struct('hhi').size // 6
 ```
