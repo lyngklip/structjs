@@ -3,13 +3,21 @@ Python struct for javascript
 
 Usage:
 
+
 let struct = require("struct")
+
 let s = struct("Bid10s")
+
 console.log(s.size)
+
 let ab = new ArrayBuffer(100)
+
 s.pack_into(ab, 0, [1, -117, 47.234, "blah"])
+
 let a = s.unpack_from(ab)
+
 console.log(a)
+
 
 pack_into takes an array, I'll probably change that to match Python.
 
