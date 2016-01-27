@@ -28,3 +28,8 @@ I did not make it uppercase because it's not a constructor.
 You're not supposed to use "new".
 I did not supply the shorthand pack_into, unpack_from, calcsize nor the older
 pack and unpack functions, as they don't add much value to the module.
+
+Please be aware that my interest in javascript is purely academic at this point,
+I have no idea if this code is idiomatic or even runs across various platforms.
+I have only tested with node and mocha, I don't know if it will work with other
+package manager, I don't even know if it works properly with npm.
