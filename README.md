@@ -3,13 +3,15 @@ Python struct for javascript
 
 Usage:
 
-struct = require("struct")
+let struct = require("struct")
 
-ab = ArrayBuffer(100)
+let ab = ArrayBuffer(100)
 
-s = struct("Bid10s")
+let s = struct("Bid10s")
+console.log(s.size)
 s.pack_into(ab, 0, [1, -117, 47.234, "blah"])
-console.log(s.size, s.unpack_from(ab))
+let a = s.unpack_from(ab)
+console.log(a)
 
 The format is the same as for Python except I left out q, Q, l, L, and P.
 
