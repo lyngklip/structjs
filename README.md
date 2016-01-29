@@ -1,7 +1,6 @@
 #structjs
-Python struct for javascript
+Python-style struct module in javascript
 
-Part of the documentation is blatantly stolen from Python docs.
 ##Functions
 The module defines the following function:
 
