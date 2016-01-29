@@ -60,7 +60,7 @@ Format characters have the following meaning:
 ```
 Differences from Python:
 No 'l', 'L', 'q', 'Q', 'P', no integers, no floats, no doubles, only numbers.
-For 'l' and 'L' use 'i' and 'I'. For 'P' use 'H', or 'I' as appropriate.
+For 'l' and 'L' use 'i' and 'I'. For 'P' use 'H' or 'I' as appropriate.
 'q' and 'Q' cannot be fully represented in javascript. Use 'i' or 'I' instead.
 ```
 A format character may be preceded by an integral repeat count. For example, the format string `'4h'` means exactly the same as `'hhhh'`.
