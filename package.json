@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha --harmony --require should"
+    "test": "mocha --harmony --harmony_destructuring --require should"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,7 @@
     "python",
     "javascript",
     "struct",
+    "structure",
     "pack",
     "unpack",
     "pack_into",
@@ -32,11 +33,6 @@
   },
   "homepage": "https://github.com/TheRealAksel/structjs#readme",
   "eslintConfig": {
-    "env": {
-      "es6": true,
-      "node": true,
-      "mocha": true
-    },
     "ecmaFeatures": { "modules": true }
   }
 }

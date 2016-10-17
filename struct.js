@@ -1,3 +1,4 @@
+/*eslint-env es6, node*/
 "use strict"
 const rechk = /^([<>])?(([1-9]\d*)?([xcbB?hHiIfdsp]))*$/
 const refmt = /([1-9]\d*)?([xcbB?hHiIfdsp])/g
@@ -43,6 +44,27 @@ const struct = format => {
         new Uint8Array(arrb, offs, size).fill(0)
         fns.forEach((f, i) => f.p(v, values[i]))
     }
-    return Object.freeze({unpack_from, pack_into, format, size})
+    const pack = (...values) => {
+        let b = new ArrayBuffer(size)
+        pack_into(b, 0, ...values)
+        return b
+    }
+    const unpack = arrb => unpack_from(arrb, 0)
+    function* iter_unpack(arrb) { 
+        for (let offs = 0; offs + size <= arrb.byteLength; offs += size) {
+            yield unpack_from(arrb, offs);
+        }
+    }
+    return Object.freeze({
+        unpack, pack, unpack_from, pack_into, iter_unpack, format, size})
 }
-module.exports = struct
+const pack = (format, ...values) => struct(format).pack(...values)
+const unpack = (format, buffer) => struct(format).unpack(buffer)
+const pack_into = (format, arrb, offs, ...values) =>
+    struct(format).pack_into(arrb, offs, ...values)
+const unpack_from = (format, arrb, offset) =>
+    struct(format).unpack_from(arrb, offset)
+const iter_unpack = (format, arrb) => struct(format).iter_unpack(arrb)
+const calcsize = format => struct(format).size
+module.exports = {
+    struct, pack, unpack, pack_into, unpack_from, iter_unpack, calcsize }
