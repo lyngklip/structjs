@@ -74,7 +74,7 @@ For the `'?'` format character, the return value is either `true` or `false`. Wh
 ###Examples:
 A basic example of packing/unpacking three integers:
 ```javascript
-let struct = require("./struct")
+let struct = require("./struct").struct
 let s = struct('hhi')
 s.size // 8
 let b = new ArrayBuffer(s.size)
@@ -83,7 +83,7 @@ new Uint8Array(b) // Uint8Array { '0': 0, '1': 1, '2': 0, '3': 2, '4': 0, '5': 0
 ```
 Unpacked fields can be named by assigning them to variables:
 ```javascript
-let struct = require("./struct"), s = struct("<10sHHb"), b = new ArrayBuffer(s.size)
+let struct = require("./struct").struct, s = struct("<10sHHb"), b = new ArrayBuffer(s.size)
 s.pack_into(b, 0, "Raymond   ", 4658, 264, 8)
 Array.prototype.map.call(new Uint8Array(b), x => "0x" + x.toString(16)).join(", ")
 // '0x52, 0x61, 0x79, 0x6d, 0x6f, 0x6e, 0x64, 0x20, 0x20, 0x20, 0x32, 0x12, 0x8, 0x1, 0x8'
