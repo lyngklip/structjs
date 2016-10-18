@@ -1,11 +1,37 @@
-#structjs
-Python-style struct module in javascript
+#structjs - Python-style struct module in javascript
+This module performs conversions between javascript values and C structs represented as javascript ArrayBuffer objects. This can be used in handling binary data stored in files or from network connections, among other sources. It uses Format Strings as compact descriptions of the layout of the C structs and the intended conversion to/from javascript values.
+
+> **Note:** Unlike Python struct, this module does not support native size and alignment (that wouldn't make much sense in a javascript). Instead, specify byte order and emit pad bytes explicitly.
+
+Several struct functions (and methods of Struct) take a buffer argument. This refers to ArrayBuffer objects.
+
+> **Note:** In Python struct the buffer argument refers to an object that implements the Buffer Protocol.
 
 ##Functions
 The module defines the following function:
 
-`struct`(*format*)  
-Return a new object which writes and reads binary data according to the format string *format*.  
+**pack**(*fmt, v1, v2, ...*)  
+Return a bytes object containing the values *v1, v2, ...* packed according to the format string *fmt*. The arguments must match the values required by the format exactly.
+
+**pack_into**(*fmt, buffer, offset, v1, v2, ...*)  
+Pack the values *v1, v2, ...* according to the format string *fmt* and write the packed bytes into the writable buffer *buffer* starting at position *offset*. Note that offset is a required argument.
+
+**unpack**(*fmt, buffer*)  
+Unpack from the buffer *buffer* (presumably packed by `pack(fmt, ...)`) according to the format string *fmt*. The result is a tuple even if it contains exactly one item. The buffer’s size in bytes must match the size required by the format, as reflected by [calcsize()](#calcsize).
+
+**unpack_from**(*fmt, buffer, offset=0*)  
+Unpack from buffer starting at position *offset*, according to the format string *fmt*. The result is a tuple even if it contains exactly one item. The buffer’s size in bytes, minus offset, must be at least the size required by the format, as reflected by `calcsize()`.
+
+**iter_unpack**(*fmt, buffer*)  
+Iteratively unpack from the buffer buffer according to the format string *fmt*. This function returns an iterator which will read equally-sized chunks from the buffer until all its contents have been consumed. The buffer’s size in bytes must be a multiple of the size required by the format, as reflected by `calcsize()`.
+
+Each iteration yields a tuple as specified by the format string.
+
+<a name="calcsize"></a>**calcsize**(*fmt*)  
+Return the size of the struct (and hence of the bytes object produced by pack(fmt, ...)) corresponding to the format string fmt.
+
+**struct**(*fmt*)  
+Return a new object which writes and reads binary data according to the format string *fmt*.  
 This is not a constructor. Don't use new.
 
 The object has the following methods and attributes:
