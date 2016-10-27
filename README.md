@@ -23,19 +23,19 @@ The compiled struct objects returned by [struct](#struct) support the following 
 
 <a name="pack"></a>
 **pack**(*v1, v2, ...*)  
-Return an [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) object containing the values *v1, v2, ...* packed according to [format]#format. The arguments must match the values required by the format exactly (`result.byteLength` will equal [size](#size)).
+Return an [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) object containing the values *v1, v2, ...* packed according to [format](#format). The arguments must match the values required by the format exactly (`result.byteLength` will equal [size](#size)).
 
 <a name="pack_into"></a>
 **pack_into**(*buffer, offset, v1, v2, ...*)  
-Pack the values *v1, v2, ...* according to [format]#format and write the packed bytes into the [ ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) *buffer* starting at position *offset*. Note that *offset* is a required argument.
+Pack the values *v1, v2, ...* according to [format](#format) and write the packed bytes into the [ ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) *buffer* starting at position *offset*. Note that *offset* is a required argument.
 
 <a name="unpack"></a>
 **unpack**(*buffer*)  
-Unpack from the [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) *buffer* (presumably packed by `pack()`) according to [format]#format. The result is a tuple even if it contains exactly one item. The buffer’s size in bytes must match the size required by the format, as reflected by [calcsize()](#calcsize).
+Unpack from the [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) *buffer* (presumably packed by `pack()`) according to [format](#format). The result is a tuple even if it contains exactly one item. The buffer’s size in bytes must match the size required by the format, as reflected by [calcsize()](#calcsize).
 
 <a name="unpack_from"></a>
 **unpack_from**(*buffer, offset=0*)  
-Unpack from [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) *buffer* starting at position *offset*, according to [format]#format. The result is a tuple even if it contains exactly one item. The buffer’s size in bytes, minus *offset*, must be at least the size required by the format, as reflected by [calcsize()](#calcsize).
+Unpack from [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) *buffer* starting at position *offset*, according to [format](#format). The result is a tuple even if it contains exactly one item. The buffer’s size in bytes, minus *offset*, must be at least the size required by the format, as reflected by [calcsize()](#calcsize).
 
 <a name="iter_unpack"></a>
 **iter_unpack**(*buffer*)  
