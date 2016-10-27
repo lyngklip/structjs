@@ -58,6 +58,8 @@ const struct = format => {
     return Object.freeze({
         unpack, pack, unpack_from, pack_into, iter_unpack, format, size})
 }
+module.exports = struct
+/*
 const pack = (format, ...values) => struct(format).pack(...values)
 const unpack = (format, buffer) => struct(format).unpack(buffer)
 const pack_into = (format, arrb, offs, ...values) =>
@@ -68,3 +70,4 @@ const iter_unpack = (format, arrb) => struct(format).iter_unpack(arrb)
 const calcsize = format => struct(format).size
 module.exports = {
     struct, pack, unpack, pack_into, unpack_from, iter_unpack, calcsize }
+*/
