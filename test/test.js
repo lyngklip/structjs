@@ -1,7 +1,7 @@
 /*eslint-env es6, mocha*/
 "use strict"
 require("should")
-var {struct, pack, unpack, calcsize} = require("../struct")
+let struct = require("../struct")
 describe('struct', () => {
     let ab = new ArrayBuffer(100)
     let u8a = new Uint8Array(ab)
@@ -10,16 +10,8 @@ describe('struct', () => {
         new Uint8Array(b).should.deepEqual(new Uint8Array([0xFF]))
         s.unpack(b).should.deepEqual([-1])
     })
-    it('packs and unpacks using pack and unpack methods', () => {
-        let b = pack('b', -1)
-        new Uint8Array(b).should.deepEqual(new Uint8Array([0xFF]))
-        unpack('b', b).should.deepEqual([-1])
-    })
-    it('calculates size', () => {
-        calcsize('b').should.equal(1)
-    })
     it('iterates', () => {
-        Array.from(struct('b').iter_unpack(pack('bb', 1, 2))).should.deepEqual([[1], [2]])
+        Array.from(struct('b').iter_unpack(struct('bb').pack(1, 2))).should.deepEqual([[1], [2]])
     })
     it('packs and unpacks signed bytes', () => {
         struct('b').pack_into(ab, 5, -1)
