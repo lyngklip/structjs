@@ -14,6 +14,8 @@ The module defines the following function:
 **struct**(*format*)  
 Return a new object which writes and reads binary data according to the [format string](#format-strings) *format*.
 
+> **Note:** This is not a constructor, don't use new. In Python this is a constructor. Python has functions for packing and unpacking without the intermediate step of creating an object using the struct function. However I decided against including such functions as they are redundant, and I did not want to clutter the interface unnecessarily. They are currently in the code but inside a comment.
+
 ##Objects
 
 <a name="object"></a>
