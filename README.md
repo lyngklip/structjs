@@ -39,7 +39,7 @@ Unpack from [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScrip
 
 <a name="iter_unpack"></a>
 **iter_unpack**(*buffer*)  
-Iteratively unpack from the buffer buffer according to [format]#format. This function returns an iterator which will read equally-sized chunks from the buffer until all its contents have been consumed. The buffer’s size in bytes must be a multiple of the size required by the [format]#format, as reflected by [size](#size).
+Iteratively unpack from the buffer buffer according to [format]#format. This function returns an iterator which will read equally-sized chunks from the buffer until all its contents have been consumed. The buffer’s size in bytes must be a multiple of the size required by the [format](#format), as reflected by [size](#size).
 
 Each iteration yields a tuple as specified by the [format string](#format-strings).
 
