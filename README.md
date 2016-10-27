@@ -10,35 +10,44 @@ Several struct functions (and methods of Struct) take a buffer argument. This re
 ##Functions
 The module defines the following function:
 
+<a name="struct"></a>
+**struct**(*format*)  
+Return a new object which writes and reads binary data according to the format string *format*.
+
+##Objects
+
+<a name="object"></a>
+The compiled struct objects returned by [struct](#struct) support the following methods and attributes:
+
 <a name="pack"></a>
-**pack**(*fmt, v1, v2, ...*)  
-Return an [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) object containing the values *v1, v2, ...* packed according to the format string *fmt*. The arguments must match the values required by the format exactly.
+**pack**(*v1, v2, ...*)  
+Return an [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) object containing the values *v1, v2, ...* packed according to [format]#format. The arguments must match the values required by the format exactly (`result.byteLength` will equal [size](#size)).
 
 <a name="pack_into"></a>
-**pack_into**(*fmt, buffer, offset, v1, v2, ...*)  
-Pack the values *v1, v2, ...* according to the format string *fmt* and write the packed bytes into the [ ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) *buffer* starting at position *offset*. Note that *offset* is a required argument.
+**pack_into**(*buffer, offset, v1, v2, ...*)  
+Pack the values *v1, v2, ...* according to [format]#format and write the packed bytes into the [ ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) *buffer* starting at position *offset*. Note that *offset* is a required argument.
 
 <a name="unpack"></a>
-**unpack**(*fmt, buffer*)  
-Unpack from the [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) *buffer* (presumably packed by `pack(fmt, ...)`) according to the format string *fmt*. The result is a tuple even if it contains exactly one item. The buffer’s size in bytes must match the size required by the format, as reflected by [calcsize()](#calcsize).
+**unpack**(*buffer*)  
+Unpack from the [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) *buffer* (presumably packed by `pack()`) according to [format]#format. The result is a tuple even if it contains exactly one item. The buffer’s size in bytes must match the size required by the format, as reflected by [calcsize()](#calcsize).
 
 <a name="unpack_from"></a>
-**unpack_from**(*fmt, buffer, offset=0*)  
-Unpack from [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) *buffer* starting at position *offset*, according to the format string *fmt*. The result is a tuple even if it contains exactly one item. The buffer’s size in bytes, minus *offset*, must be at least the size required by the format, as reflected by [calcsize()](#calcsize).
+**unpack_from**(*buffer, offset=0*)  
+Unpack from [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) *buffer* starting at position *offset*, according to [format]#format. The result is a tuple even if it contains exactly one item. The buffer’s size in bytes, minus *offset*, must be at least the size required by the format, as reflected by [calcsize()](#calcsize).
 
 <a name="iter_unpack"></a>
-**iter_unpack**(*fmt, buffer*)  
-Iteratively unpack from the buffer buffer according to the format string *fmt*. This function returns an iterator which will read equally-sized chunks from the buffer until all its contents have been consumed. The buffer’s size in bytes must be a multiple of the size required by the format, as reflected by [calcsize()](#calcsize).
+**iter_unpack**(*buffer*)  
+Iteratively unpack from the buffer buffer according to [format]#format. This function returns an iterator which will read equally-sized chunks from the buffer until all its contents have been consumed. The buffer’s size in bytes must be a multiple of the size required by the [format]#format, as reflected by [size](#size).
 
 Each iteration yields a tuple as specified by the format string.
 
-<a name="calcsize"></a>
-**calcsize**(*fmt*)  
-Return the size of the struct (and hence of the [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) object produced by `pack(fmt, ...)`) corresponding to the format string *fmt*.
+<a name="format"></a>
+**format**  
+The [format string](#format-strings) used to construct this object.
 
-<a name="struct"></a>
-**struct**(*format*)  
-Return a [new object](#object) which writes and reads binary data according to the format string *format*. Creating such an object once and calling its methods is more efficient than calling the functions with the same format since the format string only needs to be compiled once.
+<a name="size"></a>
+**size**  
+The calculated size of the struct (and hence of the [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) object produced by the [pack()](#pack) method) corresponding to [format](#format).
 
 <a href="format-strings"></a>
 ##Format Strings
@@ -109,51 +118,17 @@ For the `'?'` format character, the return value is either [true](link-to-es-tru
 ###Examples:
 A basic example of packing/unpacking three integers:
 ```javascript
-let struct = require("./struct")
-struct.pack('hhi', 1, 2, 3) // ArrayBuffer {}
-new Uint8Array(struct.pack('hhi', 1, 2, 3)) // Uint8Array { '0': 0, '1': 1, '2': 0, '3': 2, '4': 0, '5': 0, '6': 0, '7': 3 }
-struct.unpack('hhi', new Uint8Array([0, 1, 0, 2, 0, 0, 0, 3]).buffer) // [ 1, 2, 3 ]
-struct.calcsize('hhi') // 8
-```
-Similar example using the Struct object and pack_into:
-```javascript
-let struct = require("./struct").struct, s = struct('hhi')
-s.size // 8
+let struct = require("./struct"), s = struct('hhi'), b = new ArrayBuffer(s.size)
 s.pack(1, 2, 3) // ArrayBuffer {}
 new Uint8Array(s.pack(1, 2, 3)) // Uint8Array { '0': 0, '1': 1, '2': 0, '3': 2, '4': 0, '5': 0, '6': 0, '7': 3 }
-let b = new ArrayBuffer(s.size)
+s.unpack(new Uint8Array([0, 1, 0, 2, 0, 0, 0, 3]).buffer) // [ 1, 2, 3 ]
+s.size // 8
 s.pack_into(b, 0, 1, 2, 3)
 new Uint8Array(b) // Uint8Array { '0': 0, '1': 1, '2': 0, '3': 2, '4': 0, '5': 0, '6': 0, '7': 3 }
 ```
 Unpacked fields can be named by assigning them to variables:
 ```javascript
-let struct = require("./struct")
-let record = struct.pack("<10sHHb", "Raymond   ", 4658, 264, 8)
-let [name, serialnum, school, gradelevel] = struct.unpack('<10sHHb', record)
+let struct = require("./struct"), s = struct("<10sHHb")
+let record = s.pack("Raymond   ", 4658, 264, 8)
+let [name, serialnum, school, gradelevel] = s.unpack(record)
 ```
-##Objects
-<a name="object"></a>
-The [struct()](#struct) function returns compiled objects that support the following methods and attributes:
-
-**pack**(*v1, v2, ...*)  
-Identical to the [pack()](#pack) function, using the compiled format. (`result.byteLength` will equal [size](#size).)
-
-**pack_into**(*buffer, offset, v1, v2, ...*)  
-Identical to the [pack_into()](#pack_into) function, using the compiled format.
-
-**unpack**(*buffer*)  
-Identical to the [unpack()](#unpack) function, using the compiled format. The buffer’s size in bytes must equal [size](#size).
-
-**unpack_from**(*buffer, offset=0*)  
-Identical to the [unpack_from()](#unpack_from) function, using the compiled format. The buffer’s size in bytes, minus offset, must be at least [size](#size).
-
-**iter_unpack**(*buffer*)  
-Identical to the [iter_unpack()](#iter_unpack) function, using the compiled format. The buffer’s size in bytes must be a multiple of [size](#size) (actually this is not enforced, any remainder is just ignored).
-
-<a name="format"></a>
-**format**  
-The format string used to construct this object.
-
-<a name="size"></a>
-**size**  
-The calculated size of the struct (and hence of the [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) object produced by the [pack()](#pack) method) corresponding to [format](#format).
