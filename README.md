@@ -12,7 +12,7 @@ The module defines the following function:
 
 <a name="struct"></a>
 **struct**(*format*)  
-Return a new object which writes and reads binary data according to the format string *format*.
+Return a new object which writes and reads binary data according to the [format string](#format-strings) *format*.
 
 ##Objects
 
@@ -39,7 +39,7 @@ Unpack from [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScrip
 **iter_unpack**(*buffer*)  
 Iteratively unpack from the buffer buffer according to [format]#format. This function returns an iterator which will read equally-sized chunks from the buffer until all its contents have been consumed. The buffer’s size in bytes must be a multiple of the size required by the [format]#format, as reflected by [size](#size).
 
-Each iteration yields a tuple as specified by the format string.
+Each iteration yields a tuple as specified by the [format string](#format-strings).
 
 <a name="format"></a>
 **format**  
