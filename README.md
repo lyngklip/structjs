@@ -71,7 +71,7 @@ The first character of the format string can be used to indicate the byte order,
 If the first character is not one of these, '>' is assumed.
 
 > **Differences from Python struct:**  
-> Python struct has more options that doesn't make as much sense for javascript.  
+> Python struct has more options that don't make as much sense for javascript.  
 > No '@', '=', '!'. Use '>' for '!'.  
 > No native support.  
 > No alignment. Use 'x' for padding.
