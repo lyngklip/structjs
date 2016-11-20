@@ -3,7 +3,7 @@ This module performs conversions between javascript values and C structs represe
 
 > **Note:** Unlike Python struct, this module does not support native size and alignment (that wouldn't make much sense in a javascript). Instead, specify byte order and emit pad bytes explicitly.
 
-Several struct functions (and methods of Struct) take a buffer argument. This refers to [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) objects.
+Several methods of [Struct](#object) take a buffer argument. This refers to [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) objects.
 
 > **Note:** In Python struct the buffer argument refers to an object that implements the Buffer Protocol.
 
@@ -19,7 +19,7 @@ Return a new object which writes and reads binary data according to the [format 
 ##Objects
 
 <a name="object"></a>
-The compiled struct objects returned by [struct](#struct) support the following methods and attributes:
+The compiled Struct objects returned by [struct](#struct) support the following methods and attributes:
 
 <a name="pack"></a>
 **pack**(*v1, v2, ...*)  
@@ -31,11 +31,11 @@ Pack the values *v1, v2, ...* according to [format](#format) and write the packe
 
 <a name="unpack"></a>
 **unpack**(*buffer*)  
-Unpack from the [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) *buffer* (presumably packed by `pack()`) according to [format](#format). The result is a tuple even if it contains exactly one item. The buffer’s size in bytes must match the size required by the format, as reflected by [calcsize()](#calcsize).
+Unpack from the [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) *buffer* (presumably packed by `pack()`) according to [format](#format). The result is a tuple even if it contains exactly one item. The buffer’s size in bytes must match the size required by the format, as reflected by [size](#size).
 
 <a name="unpack_from"></a>
 **unpack_from**(*buffer, offset=0*)  
-Unpack from [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) *buffer* starting at position *offset*, according to [format](#format). The result is a tuple even if it contains exactly one item. The buffer’s size in bytes, minus *offset*, must be at least the size required by the format, as reflected by [calcsize()](#calcsize).
+Unpack from [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) *buffer* starting at position *offset*, according to [format](#format). The result is a tuple even if it contains exactly one item. The buffer’s size in bytes, minus *offset*, must be at least the size required by the format, as reflected by [size](#size).
 
 <a name="iter_unpack"></a>
 **iter_unpack**(*buffer*)  
