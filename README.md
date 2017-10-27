@@ -1,4 +1,4 @@
-#structjs - Python-style struct module in javascript
+# structjs - Python-style struct module in javascript
 This module performs conversions between javascript values and C structs represented as javascript [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) objects. This can be used in handling binary data stored in files or from network connections, among other sources. It uses [Format Strings](#format-strings) as compact descriptions of the layout of the C structs and the intended conversion to/from javascript values.
 
 > **Note:** Unlike Python struct, this module does not support native size and alignment (that wouldn't make much sense in a javascript). Instead, specify byte order and emit pad bytes explicitly.
@@ -7,7 +7,7 @@ Several methods of [Struct](#object) take a buffer argument. This refers to [Arr
 
 > **Note:** In Python struct the buffer argument refers to an object that implements the Buffer Protocol.
 
-##Functions
+## Functions
 The module defines the following function:
 
 <a name="struct"></a>
@@ -16,7 +16,7 @@ Return a new object which writes and reads binary data according to the [format 
 
 > **Note:** This is not a constructor, don't use new. In Python this is a constructor. Python has functions for packing and unpacking without the intermediate step of creating an object using the struct function. However I decided against including such functions as they are redundant, and I did not want to clutter the interface unnecessarily. They are currently in the code but inside a comment.
 
-##Objects
+## Objects
 
 <a name="object"></a>
 The compiled Struct objects returned by [struct](#struct) support the following methods and attributes:
@@ -52,12 +52,12 @@ The [format string](#format-strings) used to construct this object.
 The calculated size of the struct (and hence of the [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) object produced by the [pack()](#pack) method) corresponding to [format](#format).
 
 <a href="format-strings"></a>
-##Format Strings
+## Format Strings
 Format strings are the mechanism used to specify the expected layout when packing and unpacking data. They are built up from [Format Characters](#format-characters), which specify the type of data being packed/unpacked. In addition, there are special characters for controlling the [Byte Order](#byte-order).
 
 > **Note:** Unlike Python struct, this module does not have special format characters for indicating native size and alignment.
 
-###Byte Order
+### Byte Order
 By default, C types are represented in the standard format and byte order, and not aligned in any way (no pad bytes are inserted).
 
 > **Note:** This is different from Python struct which uses native format.
@@ -76,7 +76,7 @@ If the first character is not one of these, '>' is assumed.
 > No native support.  
 > No alignment. Use 'x' for padding.
 
-###Format Characters
+### Format Characters
 Format characters have the following meaning; the conversion between C and ES values should be obvious given their types. The ‘Size’ column refers to the size of the packed value in bytes:
 
 |Format|C Type     |ES Type |Size|
@@ -117,7 +117,7 @@ The 'p' format character encodes a “Pascal string”, meaning a short variable
 
 For the `'?'` format character, the return value is either [true](link-to-es-true) or [false](link-to-es-false). When packing, the truth value of the argument object is used. Either 0 or 1 in the native or standard bool representation will be packed, and any non-zero value will be `true` when unpacking.
 
-###Examples:
+### Examples:
 A basic example of packing/unpacking three integers:
 ```javascript
 let struct = require("./struct"), s = struct('hhi'), b = new ArrayBuffer(s.size)
