@@ -1,5 +1,5 @@
 {
-  "name": "structjs",
+  "name": "@aksel/structjs",
   "version": "1.0.0",
   "description": "Python struct for javascript",
   "main": "struct.js",
@@ -33,6 +33,11 @@
   },
   "homepage": "https://github.com/TheRealAksel/structjs#readme",
   "eslintConfig": {
-    "ecmaFeatures": { "modules": true }
+    "ecmaFeatures": {
+      "modules": true
+    }
+  },
+  "dependencies": {
+    "npm-name": "^5.0.1"
   }
 }
