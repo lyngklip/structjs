@@ -36,8 +36,5 @@
     "ecmaFeatures": {
       "modules": true
     }
-  },
-  "dependencies": {
-    "npm-name": "^5.0.1"
   }
 }
