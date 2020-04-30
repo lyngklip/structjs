@@ -1,6 +1,6 @@
 {
   "name": "@aksel/structjs",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Python struct for javascript",
   "main": "struct.mjs",
   "type": "module",
