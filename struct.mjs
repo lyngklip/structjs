@@ -24,7 +24,7 @@ const lut = le => ({
 })
 const errbuf = new RangeError("Structure larger than remaining buffer")
 const errval = new RangeError("Not enough values for structure")
-export const struct = format => {
+export default function struct(format) {
     let fns = [], size = 0, m = rechk.exec(format)
     if (!m) { throw new RangeError("Invalid format string") }
     const t = lut('<' === m[1]), lu = (n, c) => t[c](n ? parseInt(n, 10) : 1)

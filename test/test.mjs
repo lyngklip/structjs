@@ -2,7 +2,7 @@
 import should from "should";
 should();
 
-import { struct } from "../struct.mjs";
+import struct from "../struct.mjs";
 describe('struct', () => {
     let ab = new ArrayBuffer(100)
     let u8a = new Uint8Array(ab)
