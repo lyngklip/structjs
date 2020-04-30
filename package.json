@@ -37,5 +37,9 @@
     "ecmaFeatures": {
       "modules": true
     }
+  },
+  "devDependencies": {
+    "mocha": "^7.1.2",
+    "should": "^13.2.3"
   }
 }
