@@ -8,7 +8,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha --harmony --harmony_destructuring --require should"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
