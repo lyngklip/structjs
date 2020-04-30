@@ -120,7 +120,8 @@ For the `'?'` format character, the return value is either [true](link-to-es-tru
 ### Examples:
 A basic example of packing/unpacking three integers:
 ```javascript
-let struct = require("./struct"), s = struct('hhi'), b = new ArrayBuffer(s.size)
+import struct from "struct";
+let s = struct('hhi'), b = new ArrayBuffer(s.size)
 s.pack(1, 2, 3) // ArrayBuffer {}
 new Uint8Array(s.pack(1, 2, 3)) // Uint8Array { '0': 0, '1': 1, '2': 0, '3': 2, '4': 0, '5': 0, '6': 0, '7': 3 }
 s.unpack(new Uint8Array([0, 1, 0, 2, 0, 0, 0, 3]).buffer) // [ 1, 2, 3 ]
@@ -130,7 +131,8 @@ new Uint8Array(b) // Uint8Array { '0': 0, '1': 1, '2': 0, '3': 2, '4': 0, '5': 0
 ```
 Unpacked fields can be named by assigning them to variables:
 ```javascript
-let struct = require("./struct"), s = struct("<10sHHb")
+import struct from "struct";
+let s = struct("<10sHHb")
 let record = s.pack("Raymond   ", 4658, 264, 8)
 let [name, serialnum, school, gradelevel] = s.unpack(record)
 ```
