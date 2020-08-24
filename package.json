@@ -1,13 +1,14 @@
 {
   "name": "@aksel/structjs",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Python struct for javascript",
-  "main": "struct.js",
+  "main": "struct.mjs",
+  "type": "module",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "mocha --harmony --harmony_destructuring --require should"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -36,5 +37,9 @@
     "ecmaFeatures": {
       "modules": true
     }
+  },
+  "devDependencies": {
+    "mocha": "^7.1.2",
+    "should": "^13.2.3"
   }
 }

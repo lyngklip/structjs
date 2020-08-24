@@ -1,5 +1,4 @@
-/*eslint-env es6, node*/
-"use strict"
+/*eslint-env es6*/
 const rechk = /^([<>])?(([1-9]\d*)?([xcbB?hHiIfdsp]))*$/
 const refmt = /([1-9]\d*)?([xcbB?hHiIfdsp])/g
 const str = (v,o,c) => String.fromCharCode(
@@ -25,7 +24,7 @@ const lut = le => ({
 })
 const errbuf = new RangeError("Structure larger than remaining buffer")
 const errval = new RangeError("Not enough values for structure")
-const struct = format => {
+export default function struct(format) {
     let fns = [], size = 0, m = rechk.exec(format)
     if (!m) { throw new RangeError("Invalid format string") }
     const t = lut('<' === m[1]), lu = (n, c) => t[c](n ? parseInt(n, 10) : 1)
@@ -58,7 +57,6 @@ const struct = format => {
     return Object.freeze({
         unpack, pack, unpack_from, pack_into, iter_unpack, format, size})
 }
-module.exports = struct
 /*
 const pack = (format, ...values) => struct(format).pack(...values)
 const unpack = (format, buffer) => struct(format).unpack(buffer)
